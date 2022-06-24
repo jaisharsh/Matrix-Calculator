@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     int b[] [] = new int [3][3];
     int c [] [] = new int[3][3];
     int adj[][] = new int[3][3];
+    String Ax[][] = new String[3][3];
+    String Bx[][] = new String[3][3];
     int i,j;
 
     @Override
@@ -39,8 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
         for(i=0;i<3;i++) {
             for(j=0;j<3;j++) {
-                a[i][j]=Integer.parseInt(A[i][j].getText().toString());
-                b[i][j]=Integer.parseInt(B[i][j].getText().toString());
+                Ax[i][j]=A[i][j].getText().toString();
+                Ax[i][j]=Ax[i][j].trim();
+                a[i][j]=Integer.parseInt(Ax[i][j]);
+                Bx[i][j]=B[i][j].getText().toString();
+                Bx[i][j]=Bx[i][j].trim();
+                b[i][j]=Integer.parseInt(Bx[i][j]);
             }
         }
         for(i=0;i<3;i++) {
@@ -68,8 +74,12 @@ public class MainActivity extends AppCompatActivity {
     public void Subtraction(View view) {
         for(i=0;i<3;i++) {
             for(j=0;j<3;j++) {
-                a[i][j]=Integer.parseInt(A[i][j].getText().toString());
-                b[i][j]=Integer.parseInt(B[i][j].getText().toString());
+                Ax[i][j]=A[i][j].getText().toString();
+                Ax[i][j]=Ax[i][j].trim();
+                a[i][j]=Integer.parseInt(Ax[i][j]);
+                Bx[i][j]=B[i][j].getText().toString();
+                Bx[i][j]=Bx[i][j].trim();
+                b[i][j]=Integer.parseInt(Bx[i][j]);
             }
         }
         for(i=0;i<3;i++) {
@@ -96,8 +106,12 @@ public class MainActivity extends AppCompatActivity {
     public void Multiplication(View view) {
         for(i=0;i<3;i++) {
             for(j=0;j<3;j++) {
-                a[i][j]=Integer.parseInt(A[i][j].getText().toString());
-                b[i][j]=Integer.parseInt(B[i][j].getText().toString());
+                Ax[i][j]=A[i][j].getText().toString();
+                Ax[i][j]=Ax[i][j].trim();
+                a[i][j]=Integer.parseInt(Ax[i][j]);
+                Bx[i][j]=B[i][j].getText().toString();
+                Bx[i][j]=Bx[i][j].trim();
+                b[i][j]=Integer.parseInt(Bx[i][j]);
             }
         }
         for( i=0;i<3;i++)
@@ -129,7 +143,9 @@ public class MainActivity extends AppCompatActivity {
     public void Determinant(View view) {
         for(i=0;i<3;i++) {
             for(j=0;j<3;j++) {
-                a[i][j]=Integer.parseInt(A[i][j].getText().toString());
+                Ax[i][j]=A[i][j].getText().toString();
+                Ax[i][j]=Ax[i][j].trim();
+                a[i][j]=Integer.parseInt(Ax[i][j]);
             }
         }
           int det =a[0][0]*(a[1][1]*a[2][2]-a[2][1]*a[1][2]) - a[0][1]*(a[1][0]*a[2][2]-a[2][0]*a[1][2]) + a[0][2]*(a[1][0]*a[2][1]-a[2][0]*a[1][1]);
@@ -139,7 +155,9 @@ public class MainActivity extends AppCompatActivity {
     public void Adjoint(View view) {
         for(i=0;i<3;i++) {
             for(j=0;j<3;j++) {
-                a[i][j]=Integer.parseInt(A[i][j].getText().toString());
+                Ax[i][j]=A[i][j].getText().toString();
+                Ax[i][j]=Ax[i][j].trim();
+                a[i][j]=Integer.parseInt(Ax[i][j]);
             }
         }
         adj[0][0] = a[1][1]*a[2][2] - a[2][1]*a[1][2];
@@ -169,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle mBundle = new Bundle();
         mBundle.putSerializable("result",r);
         intent.putExtras(mBundle);
-        String p = "ADJOINT \n OF A =";
+        String p = "ADJOINT OF A =";
         intent.putExtra("Extra",p);
         startActivity(intent);
 
@@ -178,7 +196,9 @@ public class MainActivity extends AppCompatActivity {
     public void Inverse(View view) {
         for(i=0;i<3;i++) {
             for(j=0;j<3;j++) {
-                a[i][j]=Integer.parseInt(A[i][j].getText().toString());
+                Ax[i][j]=A[i][j].getText().toString();
+                Ax[i][j]=Ax[i][j].trim();
+                a[i][j]=Integer.parseInt(Ax[i][j]);
             }
         }
         adj[0][0] = a[1][1]*a[2][2] - a[2][1]*a[1][2];
@@ -190,22 +210,26 @@ public class MainActivity extends AppCompatActivity {
         adj[2][0] = a[0][1]*a[1][2] - a[0][2]*a[1][1];
         adj[2][1] = -(a[0][0]*a[1][2] - a[1][0]*a[0][2]);
         adj[2][2] = a[0][0]*a[1][1] - a[1][0]*a[0][1];
-        int det =a[0][0]*(a[1][1]*a[2][2]-a[2][1]*a[1][2]) - a[0][1]*(a[1][0]*a[2][2]-a[2][0]*a[1][2]) + a[0][2]*(a[1][0]*a[2][1]-a[2][0]*a[1][1]);
+        float det =a[0][0]*(a[1][1]*a[2][2]-a[2][1]*a[1][2]) - a[0][1]*(a[1][0]*a[2][2]-a[2][0]*a[1][2]) + a[0][2]*(a[1][0]*a[2][1]-a[2][0]*a[1][1]);
         if(det == 0) {
             Toast.makeText(this," Matrix A is Not Invertible as it's determinant is zero",Toast.LENGTH_LONG).show();
         }
         else {
             float res[][] = new float[3][3];
+            int resu[][] = new int[3][3];
+            float result[][] = new float[3][3];
             for (i = 0; i < 3; i++) {
                 for (j = 0; j < 3; j++) {
                     c[i][j] = adj[j][i];
-                    res[i][j] = c[i][j] / det;
+                    res[i][j] = (c[i][j] / det)*10000;
+                    resu[i][j] = (int)res[i][j];
+                    result[i][j] = (float)resu[i][j]/10000;
                 }
             }
             String r[][] = new String[3][3];
             for (i = 0; i < 3; i++) {
                 for (j = 0; j < 3; j++) {
-                    r[i][j] = Float.toString(res[i][j]);
+                    r[i][j] = Float.toString(result[i][j]);
                 }
             }
 
@@ -213,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle mBundle = new Bundle();
             mBundle.putSerializable("result", r);
             intent.putExtras(mBundle);
-            String p = "INVERSE \n OF A =";
+            String p = "INVERSE OF A =";
             intent.putExtra("Extra", p);
             startActivity(intent);
         }
